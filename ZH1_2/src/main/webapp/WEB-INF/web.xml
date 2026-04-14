@@ -1,0 +1,22 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <servlet>
+        <servlet-name>foodList</servlet-name>
+        <servlet-class>hu.pte.mik.prog4.zh1.servlet.FoodListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>foodList</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>logxml</servlet-name>
+        <servlet-class>hu.pte.mik.prog4.zh1.servlet.logxmlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logxml</servlet-name>
+        <url-pattern>/logxml</url-pattern>
+    </servlet-mapping>
+</web-app>

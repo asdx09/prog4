@@ -1,0 +1,6 @@
+hu\pte\mik\prog4\zh1\servlet\FoodListServlet.class
+hu\pte\mik\prog4\zh1\repository\FoodRepository.class
+hu\pte\mik\prog4\zh1\tag\FavoriteTag.class
+hu\pte\mik\prog4\zh1\util\IdProvider.class
+hu\pte\mik\prog4\zh1\model\Food.class
+hu\pte\mik\prog4\zh1\service\FoodService.class
