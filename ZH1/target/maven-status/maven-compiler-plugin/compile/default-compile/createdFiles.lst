@@ -1,0 +1,7 @@
+servlet\DeleteFoodServlet.class
+model\Food.class
+tag\FavoriteTag.class
+servlet\FoodListServlet.class
+servlet\FavoriteFoodServlet.class
+repository\FoodRepository.class
+servlet\NewFoodServlet.class

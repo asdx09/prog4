@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+        <servlet>
+            <servlet-name>foodList</servlet-name>
+            <servlet-class>servlet.FoodListServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>foodList</servlet-name>
+            <url-pattern>/list</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>newFood</servlet-name>
+            <servlet-class>servlet.NewFoodServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>newFood</servlet-name>
+            <url-pattern>/new</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>deleteFood</servlet-name>
+            <servlet-class>servlet.DeleteFoodServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>deleteFood</servlet-name>
+            <url-pattern>/delete</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>favoriteFood</servlet-name>
+            <servlet-class>servlet.FavoriteFoodServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>favoriteFood</servlet-name>
+            <url-pattern>/favorite</url-pattern>
+        </servlet-mapping>
+
+        <filter>
+            <filter-name>foodFilter</filter-name>
+            <filter-class>filter.FoodFilter</filter-class>
+        </filter>
+        <filter-mapping>
+            <filter-name>foodFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
+</web-app>
