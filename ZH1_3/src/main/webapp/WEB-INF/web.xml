@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    <servlet>
+        <servlet-name>Food</servlet-name>
+        <servlet-class>hu.pte.mik.prog4.zh1.servlet.FoodServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Food</servlet-name>
+        <url-pattern>/Food</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddFood</servlet-name>
+        <servlet-class>hu.pte.mik.prog4.zh1.servlet.AddFoodServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddFood</servlet-name>
+        <url-pattern>/AddFood</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>filter</filter-name>
+        <filter-class>hu.pte.mik.prog4.zh1.filter.filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filter</filter-name>
+        <url-pattern>/AddFood</url-pattern>
+    </filter-mapping>
+
+</web-app>
