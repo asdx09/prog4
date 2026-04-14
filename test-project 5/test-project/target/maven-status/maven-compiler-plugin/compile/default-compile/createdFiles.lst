@@ -1,0 +1,14 @@
+hu\pte\mik\prog4\service\PersonService.class
+hu\pte\mik\prog4\model\Company.class
+hu\pte\mik\prog4\model\Client.class
+hu\pte\mik\prog4\repository\ClientRepository.class
+hu\pte\mik\prog4\repository\PersonRepository.class
+hu\pte\mik\prog4\service\CompanyService.class
+hu\pte\mik\prog4\model\Person.class
+hu\pte\mik\prog4\service\ClientService.class
+hu\pte\mik\prog4\servlet\PersonPaymentServlet.class
+hu\pte\mik\prog4\servlet\HelloWorldServlet.class
+hu\pte\mik\prog4\repository\CompanyRepository.class
+hu\pte\mik\prog4\servlet\CompanyPaymentServlet.class
+hu\pte\mik\prog4\repository\DataSource.class
+hu\pte\mik\prog4\service\IdProvider.class
