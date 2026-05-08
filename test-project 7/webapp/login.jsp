@@ -1,0 +1,22 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<form method="POST" action="j_security_check">
+    <div>
+        <span>Username</span>
+        <input type="text" name="j_username">
+    </div>
+    <div>
+        <span>Password</span>
+        <input type="text" name="j_password">
+    </div>
+    <div>
+        <input type="submit" value="Login">
+    </div>
+</form>
+
+</body>
+</html>

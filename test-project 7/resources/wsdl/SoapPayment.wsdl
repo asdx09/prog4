@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="payment" targetNamespace="hu.pte.mik.prog4.ws.soap" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="hu.pte.mik.prog4.ws.soap" xmlns:ns1="http://ws.prog4.mik.pte.hu/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:import namespace="http://ws.prog4.mik.pte.hu/" location="Payment.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="paymentSoapBinding" type="ns1:Payment">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="companyPay">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="companyPay">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="companyPayResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="personPay">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="personPay">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="personPayResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="payment">
+    <wsdl:port name="SoapPaymentPort" binding="tns:paymentSoapBinding">
+      <soap:address location="http://localhost:8080/test_project_war_exploded/ws/pay"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
