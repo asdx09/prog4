@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Payment" targetNamespace="http://ws.prog4.mik.pte.hu/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ws.prog4.mik.pte.hu/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://ws.prog4.mik.pte.hu/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://ws.prog4.mik.pte.hu/" version="1.0">
+
+  <xs:element name="companyPay" type="tns:companyPay"/>
+
+  <xs:element name="companyPayResponse" type="tns:companyPayResponse"/>
+
+  <xs:element name="personPay" type="tns:personPay"/>
+
+  <xs:element name="personPayResponse" type="tns:personPayResponse"/>
+
+  <xs:complexType name="companyPay">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:company"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="company">
+    <xs:complexContent>
+      <xs:extension base="tns:client">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="taxNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="address" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="companyPayResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="personPay">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:person"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="person">
+    <xs:complexContent>
+      <xs:extension base="tns:client">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="personPayResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="companyPay">
+    <wsdl:part name="parameters" element="ns1:companyPay">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="companyPayResponse">
+    <wsdl:part name="parameters" element="ns1:companyPayResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="personPayResponse">
+    <wsdl:part name="parameters" element="ns1:personPayResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="personPay">
+    <wsdl:part name="parameters" element="ns1:personPay">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Payment">
+    <wsdl:operation name="companyPay">
+      <wsdl:input name="companyPay" message="ns1:companyPay">
+    </wsdl:input>
+      <wsdl:output name="companyPayResponse" message="ns1:companyPayResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="personPay">
+      <wsdl:input name="personPay" message="ns1:personPay">
+    </wsdl:input>
+      <wsdl:output name="personPayResponse" message="ns1:personPayResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
