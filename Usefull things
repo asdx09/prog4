@@ -1,1 +1,4 @@
+mariadb jar file a tomcat -> lib
 docker-compose up -d
+
+-Djava.security.auth.login.config="C:\Users\trunk\Desktop\Nullarol\zh2-feladat\src\main\resources\jaas.config"
