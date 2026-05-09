@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="FoodDataService" targetNamespace="http://ws.zh2.prog4.mik.pte.hu/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ws.zh2.prog4.mik.pte.hu/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://ws.zh2.prog4.mik.pte.hu/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://ws.zh2.prog4.mik.pte.hu/" version="1.0">
+
+  <xs:element name="getFoodData" type="tns:getFoodData"/>
+
+  <xs:element name="getFoodDataResponse" type="tns:getFoodDataResponse"/>
+
+  <xs:complexType name="getFoodData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:foodDataRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="foodDataRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="foodId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getFoodDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:foodDataResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="foodDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="portion" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getFoodDataResponse">
+    <wsdl:part name="parameters" element="ns1:getFoodDataResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getFoodData">
+    <wsdl:part name="parameters" element="ns1:getFoodData">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="FoodDataService">
+    <wsdl:operation name="getFoodData">
+      <wsdl:input name="getFoodData" message="ns1:getFoodData">
+    </wsdl:input>
+      <wsdl:output name="getFoodDataResponse" message="ns1:getFoodDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
