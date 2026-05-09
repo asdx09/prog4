@@ -49,6 +49,7 @@ public class FoodRepository extends Repository {
             stmt.setString(1, food.getRestaurantName());
             stmt.setString(2, food.getFoodName());
             stmt.setString(3, food.getPrice());
+            stmt.setLong(4,food.getId());
 
             stmt.executeUpdate();
 
