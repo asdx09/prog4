@@ -1,0 +1,187 @@
+1. feladat:
+context.xml : Context tag közé amit megad a feladatlap
+main/webapp/META_INF/context.xml
+
+pom.xml: 
+	<dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
+2. feladat: (ws-feladat)
+sun-jaxws.xml
+Hogy működjön a wsdl generation
+<?xml version="1.0" encoding="UTF-8" ?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+    <endpoint
+            name="food"
+            implementation="hu.pte.mik.prog4.zh2.ws.SoapFoodDataService"
+            url-pattern="/ws/food"
+    />
+</endpoints>
+
+pom.xml : cxf-java2ws-plugin
+Hogy működjön a wsdl generation
+<plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-java2ws-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.cxf</groupId>
+                        <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                        <version>${cxf.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.cxf</groupId>
+                        <artifactId>cxf-rt-frontend-simple</artifactId>
+                        <version>${cxf.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>java-to-wsdl</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>java2ws</goal>
+                        </goals>
+                        <configuration>
+                            <className>hu.pte.mik.prog4.zh2.ws.SoapFoodDataService</className>
+                            <outputFile>${basedir}/src/main/resources/wsdl/SoapFoodDataService.wsdl</outputFile>
+                            <genWsdl>true</genWsdl>
+                            <verbose>true</verbose>
+                            <address>http://localhost:8081/zh2_ws_feladat_war_exploded/ws/food</address>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+3. feladat: WSDL visszamásolás + plugin
+pom.xml:
+<plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>${jaxws-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>wsdl-to-java</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>${basedir}/src/main/resources/wsdl/SoapFoodDataService.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <packageName>hu.pte.mik.prog4.generated.ws</packageName>
+                            <sourceDestDir>${basedir}/target/generated/src/main/java</sourceDestDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+5. feladat:
+
+Jersey Servlet regisztráció:
+main/webapp/WEB-INF/web.xml
+    <servlet>
+        <servlet-name>jsersey-servlet</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>hu.pte.mik.prog4.zh2.api</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jsersey-servlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+8. feladat: Realm Configuráció:
+pom.xml: Bcrypt dependency:
+	<dependency>
+            <groupId>at.favre.lib</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>0.10.2</version>
+        </dependency>
+
+jaas.config resources-be:
+zh2 {
+    hu.pte.mik.prog4.zh2.jaas.AuthenticationModule required debug=true;
+};
+
+context.xml-be Realm tag a Context-en belül:
+Realm className="org.apache.catalina.realm.JAASRealm"
+           appName="zh2"
+           userClassNames="hu.pte.mik.prog4.zh2.jaas.UserPrincipal"
+           roleClassNames="hu.pte.mik.prog4.zh2.jaas.RolePrincipal"
+    />
+
+Parancs ha kell: 
+VM Options: 
+-Djava.security.auth.login.config="C:\Users\User\Desktop\Solo\zh2-feladatok\zh2-feladat\src\main\resources\jaas.config"
+(abs elérési út)
+
+9. feladat:
+
+web.xml:
+
+Legyen FORM alapú bejelentkezés. + A bejelentkező oldal legyen a login.html. + Hibás bejelentkezés esetén irányítson át a login_failed.html-re:
+   <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.html</form-login-page>
+            <form-error-page>/login_failed.html</form-error-page>
+        </form-login-config>
+   </login-config>
+
+Az index.jsp-t el lehessen érni bejelentkezés nélkül.:
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Index</web-resource-name>
+            <url-pattern>/index.jsp</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
+
+Az összes többi oldal eléréséhez be kell jelentkezni és a “user” role-hoz legyen kötve.:
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+
+
+Az új étel felvétele a “creator” role-hoz legyen kötve.:
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Creator</web-resource-name>
+            <url-pattern>/save-food</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>creator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <role-name>creator</role-name>
+    </security-role>
+
+10. feladat: Logout
+web.xml
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>hu.pte.mik.prog4.zh2.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout/</url-pattern>
+    </servlet-mapping>
