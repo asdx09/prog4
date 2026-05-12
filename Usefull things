@@ -1,4 +1,191 @@
-mariadb jar file a tomcat -> lib
+mariadb jar file a maven -> lib
 docker-compose up -d
 
--Djava.security.auth.login.config="C:\Users\trunk\Desktop\Nullarol\zh2-feladat\src\main\resources\jaas.config"
+VM option: -Djava.security.auth.login.config="C:\example\example\example\example\zh2-feladat\src\main\resources\jaas.config"
+
+Dependencies (sima projekt):
+--------------------------------
+ALAP JSP
+
+  <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>${jakarta.servlet-api.version}</version>
+      <scope>provided</scope>
+  </dependency>
+  <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+
+  <dependency>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>${jakarta.servlet.jsp.jstl-api.version}</version>
+  </dependency>
+  <jakarta.servlet.jsp.jstl-api.version>3.0.0</jakarta.servlet.jsp.jstl-api.version>
+
+  <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>apache-jstl</artifactId>
+      <version>${apache-jstl.version}</version>
+      <scope>runtime</scope>
+  </dependency>
+  <apache-jstl.version>11.0.0</apache-jstl.version>
+
+  <dependency>
+      <groupId>jakarta.servlet.jsp</groupId>
+      <artifactId>jakarta.servlet.jsp-api</artifactId>
+      <version>${jakarta.servlet.jsp-api.version}</version>
+      <scope>provided</scope>
+  </dependency>
+  <jakarta.servlet.jsp-api.version>3.1.1</jakarta.servlet.jsp-api.version>
+
+-------------------------------------
+LOG4J
+
+  <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+  </dependency>
+<log4j.version>1.2.17</log4j.version>
+
+----------------------------------------
+WS (wsdl)
+
+  <dependency>
+      <groupId>com.sun.xml.ws</groupId>
+      <artifactId>jaxws-rt</artifactId>
+      <version>${jaxws-rt.version}</version>
+  </dependency>
+  <jaxws-rt.version>4.0.1</jaxws-rt.version>
+
+  <dependency>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+      <version>${jakarta.ws.rs-api.version}</version>
+  </dependency>
+  <jakarta.servlet.jsp-api.version>3.1.1</jakarta.servlet.jsp-api.version>
+
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>${jaxws-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>wsdl-to-java</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>${basedir}/src/main/resources/wsdl/SoapFoodDataService.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <packageName>hu.pte.mik.prog4.generated.ws</packageName>
+                            <sourceDestDir>${basedir}/target/generated/src/main/java</sourceDestDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+------------------------------------------
+glassfish - REST
+
+  <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <version>${jersey.version}</version>
+  </dependency>
+  <jersey.version>3.1.1</jersey.version>
+
+  <dependency>
+      <groupId>org.glassfish.jersey.inject</groupId>
+      <artifactId>jersey-hk2</artifactId>
+      <version>${jersey.version}</version>
+  </dependency>
+  <jersey.version>3.1.1</jersey.version>
+
+  <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+      <version>${jersey.version}</version>
+  </dependency>
+  <jersey.version>3.1.1</jersey.version>
+
+----------------------------------------------
+MariaDB
+
+  <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>${mariadb-java-client.version}</version>
+  </dependency>
+  <mariadb-java-client.version>3.1.2</mariadb-java-client.version>
+
+-------------------------------------------------
+bcrypt
+
+  <dependency>
+      <groupId>at.favre.lib</groupId>
+      <artifactId>bcrypt</artifactId>
+      <version>${bycript.version}</version>
+  </dependency>
+  <bycript.version>0.10.2</bycript.version>
+
+
+
+
+Dependencies (ws projekt):
+-------------------------------------------
+
+  <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>${jaxws-rt.version}</version>
+  </dependency>
+  <jaxws-rt.version>4.0.1</jaxws-rt.version>
+
+  <dependency>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+      <version>${jakarta.ws.rs-api.version}</version>
+  </dependency>
+  <jakarta.ws.rs-api.version>3.1.0</jakarta.ws.rs-api.version>
+
+  <build>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-war-plugin</artifactId>
+              <version>3.3.2</version>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.cxf</groupId>
+              <artifactId>cxf-java2ws-plugin</artifactId>
+              <version>${cxf.version}</version>
+              <executions>
+                  <execution>
+                      <id>java-to-wsdl</id>
+                      <phase>process-classes</phase>
+                      <goals>
+                          <goal>java2ws</goal>
+                      </goals>
+                      <configuration>
+                          <className>hu.pte.mik.prog4.zh2.ws.SoapFoodDataService</className>
+                          <outputFile>${basedir}/src/main/resources/wsdl/SoapFoodDataService.wsdl</outputFile>
+                          <genWsdl>true</genWsdl>
+                          <verbose>true</verbose>
+                          <address>http://localhost:8081/zh2_ws_feladat_war_exploded/ws/food</address>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+      </plugins>
+  </build>
