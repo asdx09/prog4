@@ -3,6 +3,9 @@ docker-compose up -d
 
 VM option: -Djava.security.auth.login.config="C:\example\example\example\example\zh2-feladat\src\main\resources\jaas.config"
 
+Nincs artifact: 
+File -> Project Structure... -> Modules+Add+Web -> Artifacts+Add+WebApplicationExploded+FromModules 
+
 Dependencies (sima projekt):
 --------------------------------
 ALAP JSP
