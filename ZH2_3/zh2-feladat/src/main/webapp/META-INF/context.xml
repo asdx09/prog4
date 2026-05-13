@@ -1,0 +1,12 @@
+<Context>
+    <Resource name="jdbc/ZH2MariaDB" type="javax.sql.DataSource"
+              driverClassName="org.mariadb.jdbc.Driver"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              url="jdbc:mariadb://localhost:3306/zh2_database" username="zh2_user"
+              password="ZH2Password111" maxActive="20"  maxIdle="10"  maxWait="-1" />
+    <Realm className="org.apache.catalina.realm.JAASRealm"
+           appName="zh2"
+           userClassNames="hu.pte.mik.prog4.zh2.jaas.UserPrincipal"
+           roleClassNames="hu.pte.mik.prog4.zh2.jaas.RolePrincipal"
+           />
+</Context>
