@@ -1,0 +1,13 @@
+hu\mik\pte\prog5\zh1vaadin\ui\view\LoginView.class
+hu\mik\pte\prog5\zh1vaadin\service\SecurityService.class
+hu\mik\pte\prog5\zh1vaadin\repository\DBPetRepository.class
+hu\mik\pte\prog5\zh1vaadin\repository\InMemoryPetRepository.class
+hu\mik\pte\prog5\zh1vaadin\ui\view\RegisterView.class
+hu\mik\pte\prog5\zh1vaadin\service\PetService.class
+hu\mik\pte\prog5\zh1vaadin\config\SecurityConfig.class
+hu\mik\pte\prog5\zh1vaadin\ui\view\ListView.class
+hu\mik\pte\prog5\zh1vaadin\repository\PetRepository.class
+hu\mik\pte\prog5\zh1vaadin\ZhVaadinApplication.class
+hu\mik\pte\prog5\zh1vaadin\entity\PetSpecies.class
+hu\mik\pte\prog5\zh1vaadin\entity\Pet.class
+hu\mik\pte\prog5\zh1vaadin\ui\MainLayout.class
